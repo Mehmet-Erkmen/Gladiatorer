@@ -38,9 +38,10 @@ elif wchoice == "spjut":
 
 print("Din hp är", luciushp,"och motståndarens hp är", gaiushp )
 
-print("Vi börjar med första rundan")
+
 
 while rundnummer:
+    print("Vi börjar med rund", rundnummer)
     if wchoice == "svärd":
         luciusmove = input("Vilken väljer du: Hacka eller stabba? ")
     elif wchoice == "spjut":
@@ -48,27 +49,48 @@ while rundnummer:
     wchoice = wchoice.lower()
 
     hackadamage = random.randint(7,10) 
-    hackachance = random.randint(1,10)
+    luc_hackachance = random.randint(1,10)
     stabbdamage = random.randint(4,8)
-    stabbchance = random.randint(1,10) 
+    luc_stabbchance = random.randint(1,10) 
     kastdamage = random.randint(3,7)
-    kastchance = random.randint(1,10)
+    luc_kastchance = random.randint(1,10)
     dropdamage = random.randint(4,7)
-    dropchance = random.randint(1,10)
+    luc_dropchance = random.randint(1,10)
+
+    gai_hackachance = random.randint(1,10)
+    gai_stabbchance = random.randint(1,10) 
+    gai_kastchance = random.randint(1,10)
+    gai_dropchance = random.randint(1,10)
+
     
     print("Du väljde", luciusmove, "och Gaius väljde", gaiusmove)
 
+   
+
     if luciusmove == "stabba":
-        if stabbchance >= 6:
+        if luc_stabbchance <= 6:
+          lucius_chance = print("Du missade.")
+    elif luciusmove == "hacka":
+        if luc_hackachance <= 4:
+          lucius_chance = print("Du missade.")
+    elif luciusmove == "kasta spjut":
+        if luc_kastchance <=8:
+           lucius_chance = print("Du missade.")
+    elif luciusmove == "spjut droppe":
+        if luc_dropchance <= 6:
+          lucius_chance = print("Du missade.")
+
+    if luciusmove == "stabba":
+        if luc_stabbchance >= 6:
           gaiushp = gaiushp - stabbdamage
     elif luciusmove == "hacka":
-        if hackadamage >= 4:
+        if luc_hackachance >= 4:
           gaiushp = gaiushp - hackadamage
     elif luciusmove == "kasta spjut":
-        if kastchance >=8:
+        if luc_kastchance >=8:
            gaiushp = gaiushp - kastdamage
     elif luciusmove == "spjut droppe":
-        if dropchance >= 6:
+        if luc_dropchance >= 6:
           gaiushp =  gaiushp - dropdamage
         
 
@@ -76,18 +98,45 @@ while rundnummer:
         print("Ni har valt samma")
 
     if gaiusmove == "stabba":
-        if stabbchance >= 6:
+        if gai_stabbchance >= 6:
            luciushp = luciushp - stabbdamage
     elif gaiusmove == "hacka":
-        if hackadamage >= 4:
+        if gai_hackachance >= 4:
           luciushp =  luciushp - hackadamage
     elif gaiusmove == "kasta spjut":
-        if kastchance >=8:
+        if gai_kastchance >=8:
            luciushp = luciushp - kastdamage
     elif gaiusmove == "spjut droppe":
-        if dropchance >= 6:
+        if gai_dropchance >= 6:
            luciushp = luciushp - dropdamage
 
+
+    if gaiusmove == "stabba":
+        if gai_stabbchance <= 6:
+         gaius_chance = print("Gaius missade.")
+    elif gaiusmove == "hacka":
+        if gai_hackachance <= 4:
+         gaius_chance = print("Gaius missade.")
+    elif gaiusmove == "kasta spjut":
+        if gai_kastchance <=8:
+           gaius_chance = print("Gaius missade.")
+    elif gaiusmove == "spjut droppe":
+        if gai_dropchance <= 6:
+           gaius_chance = print("Gaius missade.")
+
+    if gaius_chance and lucius_chance == "missade":
+        print("ni både missade")
+
+    if gaiushp or luciushp == 0:
+       print("striden är slut")
+       if gaiushp == 0:
+          print("Du vann")
+          break
+       elif luciushp == 0:
+          print("Gaius vann.")
+          break
+
+       
     print("Din hp är", luciushp,"och motståndarens hp är", gaiushp )
     rundnummer = rundnummer + 1
     print(rundnummer)
