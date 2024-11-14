@@ -6,17 +6,24 @@
 # Steg 6: berätta för spelaren vad som händer
 
 
-import random,msvcrt
+import random,msvcrt,os
+
+def clear_terminal():
+   os.system('cls' if os.name == 'nt' else 'clear')
+
 
 print("Du är Gladiatorn Lucius, du ska slåss mot Gladiatorn Gaius")
 print("Ni ligger i en romersk arena och är omrigande av publik.")
 
+#Vapen och deras move.
 weapons = ["svärd", "spjut"]
 svärdmove = ["hacka", "stabba"]
 spjutmove = ["kasta spjut", "spjut droppe"]
+
+#Hälsa för karaktärer
 luciushp = 100
 gaiushp = 100
-
+    
 print("Svärd:\n Hacka\n Stabba")
 print("Spjut:\n Spjutdroppe\n Kasta Spjut")
 
@@ -38,7 +45,7 @@ elif wchoice == "spjut":
 
 print("Din hp är", luciushp,"och motståndarens hp är", gaiushp )
 
-
+clear_terminal()
 
 while rundnummer:
     print("Vi börjar med rund", rundnummer)
@@ -48,19 +55,59 @@ while rundnummer:
         luciusmove = input("Vilken väljer du: Kasta spjut eller spjut droppe? ")
     wchoice = wchoice.lower()
 
-    hackadamage = random.randint(7,10) 
-    luc_hackachance = random.randint(1,10)
-    stabbdamage = random.randint(4,8)
-    luc_stabbchance = random.randint(1,10) 
-    kastdamage = random.randint(3,7)
-    luc_kastchance = random.randint(1,10)
-    dropdamage = random.randint(4,7)
-    luc_dropchance = random.randint(1,10)
+    if luciushp == 100:
+        luc_hackachance = random.randint(1,10)
+        luc_stabbchance = random.randint(1,10) 
+        luc_kastchance = random.randint(1,10)
+        luc_dropchance = random.randint(1,10)
 
-    gai_hackachance = random.randint(1,10)
-    gai_stabbchance = random.randint(1,10) 
-    gai_kastchance = random.randint(1,10)
-    gai_dropchance = random.randint(1,10)
+    elif luciushp <= 75:
+        luc_hackachance = random.randint(1,12)
+        luc_stabbchance = random.randint(1,12) 
+        luc_kastchance = random.randint(1,12)
+        luc_dropchance = random.randint(1,12)
+
+    elif luciushp <=50:
+        luc_hackachance = random.randint(1,15)
+        luc_stabbchance = random.randint(1,15) 
+        luc_kastchance = random.randint(1,15)
+        luc_dropchance = random.randint(1,15)
+
+    elif luciushp <=25:
+        luc_hackachance = random.randint(1,17)
+        luc_stabbchance = random.randint(1,17) 
+        luc_kastchance = random.randint(1,17)
+        luc_dropchance = random.randint(1,17)
+   
+    
+    hackadamage = random.randint(7,10) 
+    stabbdamage = random.randint(4,8)
+    kastdamage = random.randint(3,7)
+    dropdamage = random.randint(4,7)
+    
+    if gaiushp == 100:
+        gai_hackachance = random.randint(1,10)
+        gai_stabbchance = random.randint(1,10)
+        gai_kastchance = random.randint(1,10)
+        gai_dropchance = random.randint(1,10)
+
+    elif gaiushp <= 75:
+        gai_hackachance = random.randint(1,12)
+        gai_stabbchance = random.randint(1,12)
+        gai_kastchance = random.randint(1,12)
+        gai_dropchance = random.randint(1,12)
+
+    elif gaiushp <= 50:
+        gai_hackachance = random.randint(1,15)
+        gai_stabbchance = random.randint(1,15)
+        gai_kastchance = random.randint(1,15)
+        gai_dropchance = random.randint(1,15)
+
+    elif gaiushp <= 25:
+        gai_hackachance = random.randint(1,17)
+        gai_stabbchance = random.randint(1,17)
+        gai_kastchance = random.randint(1,17)
+        gai_dropchance = random.randint(1,17)
 
     
     print("Du väljde", luciusmove, "och Gaius väljde", gaiusmove)
@@ -124,8 +171,9 @@ while rundnummer:
         if gai_dropchance <= 6:
            gaius_chance = print("Gaius missade.")
 
-    if gaius_chance and lucius_chance == "missade":
-        print("ni både missade")
+    if gaius_chance == "missade":
+        if lucius_chance == "missade":
+            print("ni både missade")
 
     if gaiushp or luciushp == 0:
        print("striden är slut")
@@ -140,6 +188,8 @@ while rundnummer:
     print("Din hp är", luciushp,"och motståndarens hp är", gaiushp )
     rundnummer = rundnummer + 1
     print(rundnummer)
+   
+    clear_terminal()
     continue
     
         
